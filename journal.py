@@ -13,6 +13,26 @@ def students_dict(records):
     return temp_records
 
 
+def student_average(grades):
+    """
+    Returns the avergae of a list of grades
+    """
+
+    sum_grades = 0
+    for grade in grades:
+        sum_grades += grade
+    return sum_grades / len(grades)
+
+
+def student_report(journal):
+    """
+    Display a student_report report of the students
+    """
+    for student_name, student_grades in journal.items():
+        average = student_average(student_grades)
+        print(f"{student_name}: {student_grades} : Average ({average : .2f})")
+
+
 records = [
     ["Layla", 89],
     ["Tariq", 77],
@@ -31,3 +51,5 @@ records = [
 class_journal = students_dict(records)
 
 print(class_journal)
+
+student_report(class_journal)
