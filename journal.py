@@ -44,6 +44,42 @@ def highest_average(journal):
     print(f"Student : {name} Average : {max_avg : .2f}")
 
 
+def max_min(grades):
+    """
+    return a list of [Max,Min] of list grades
+    """
+    max_grade = 0
+    lowest_grade = 100
+
+    for grade in grades:
+        if grade > max_grade:
+            max_grade = grade
+    for grade in grades:
+        if grade < lowest_grade:
+            lowest_grade = grade
+    return [max_grade, lowest_grade]
+
+
+def consistent_performence(journal):
+    """
+    Displays the Max_avergae in the students Journal
+    """
+
+    dict_perf = {}
+    for students in journal:
+        perf = max_min(journal[students])
+        dict_perf[students] = perf[0] - perf[1]
+
+    max_perf = 100
+    name = ""
+    for student in dict_perf:
+        if dict_perf[student] < max_perf:
+            max_perf = dict_perf[student]
+            name = student
+
+    print(f"Student : {name} Perfomance : {max_perf : .2f}")
+
+
 def student_report(journal):
     """
     Display a student_report report of the students
@@ -78,3 +114,4 @@ print(class_journal)
 student_report(class_journal)
 
 highest_average(class_journal)
+consistent_performence(class_journal)
