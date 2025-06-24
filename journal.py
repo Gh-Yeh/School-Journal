@@ -26,7 +26,7 @@ def student_average(grades):
 
 def highest_average(journal):
     """
-    Displays the Max_avergae in the students Journal
+    Displays and returns the Max_avergae in the students Journal
     """
 
     dict_average = {}
@@ -42,6 +42,8 @@ def highest_average(journal):
             name = student
 
     print(f"Student : {name} Average : {max_avg : .2f}")
+
+    return [name, max_avg]
 
 
 def max_min(grades):
@@ -62,7 +64,7 @@ def max_min(grades):
 
 def consistent_performance(journal):
     """
-    Displays the Performance in the students Journal
+    Displays and returns  the Performance in the students Journal
     """
 
     dict_perf = {}
@@ -79,28 +81,43 @@ def consistent_performance(journal):
 
     print(f"Student : {name} Perfomance : {max_perf : .2f}")
 
+    return [name, max_perf]
+
 
 def failed_students(journal):
     """
-    Displays students with grade below 70.
+    Displays and returns students with grade below 70.
     """
     failed = []
     for students in journal:
         if max_min(journal[students])[1] < 70:
             failed.append(students)
 
-    print(f"students that have a grade below 70 : {failed}")
+    print(f"students that have a grade below 70 : {failed or "All above 70"}")
+
+    return failed or "All above 70"
 
 
 def total_grades(journal):
     """
-    Displays how many total grades were enetred in  class
+    Return how many total grades were enetred in  class
     """
     grade_count = 0
     for students in journal:
         grade_count += len(journal[students])
 
-    print(grade_count)
+    return grade_count
+
+
+def class_avg(journal):
+    """
+    returns the average of a class.
+    """
+    sum_grades = 0
+    for grades in journal.values():
+        sum_grades += sum(grades)
+
+    return sum_grades / total_grades(journal)
 
 
 def student_report(journal):
@@ -110,6 +127,20 @@ def student_report(journal):
     for student_name, student_grades in journal.items():
         average = student_average(student_grades)
         print(f"{student_name}: {student_grades} : Average ({average : .2f})")
+
+
+def write_in_file(journal):
+    """
+    Generate a student_report report of the students
+    """
+    message = f"Class: {journal}\n"
+    with open("class.txt", "w", encoding="utf-8") as f:
+        f.write(message)
+
+    message = f"Student with the highest average : {highest_average(journal)}\nMost Consistent Performance : {consistent_performance(journal)}\nStudents with garde less than 70 : {failed_students(journal)}\nClass average : {class_avg(journal)}\n"
+
+    with open("class.txt", "a", encoding="utf-8") as f:
+        f.write(message)
 
 
 records = [
@@ -136,7 +167,39 @@ print(class_journal)
 # Part 2: The Basic Report
 student_report(class_journal)
 
+# Part 3
 highest_average(class_journal)
 consistent_performance(class_journal)
 failed_students(class_journal)
-total_grades(class_journal)
+
+print(f"Total grades entered is {total_grades(class_journal)}")
+
+print(f"Class Average :  {class_avg(class_journal)}")
+
+save_to_file = input("Do you want to save into a file (yes/no)")
+if save_to_file.lower() == "yes":
+    write_in_file(class_journal)
+
+# Part 4
+new_grades = [["Jana", 99], ["Ziad", 78], ["Layla", 84]]
+
+class_journal = students_dict(new_grades)
+
+print(class_journal)
+
+
+# Part 2: The Basic Report
+student_report(class_journal)
+
+# Part 3
+highest_average(class_journal)
+consistent_performance(class_journal)
+failed_students(class_journal)
+
+print(f"Total grades entered is {total_grades(class_journal)}")
+
+print(f"Class Average :  {class_avg(class_journal)}")
+
+save_to_file = input("Do you want to save into a file (yes/no)")
+if save_to_file.lower() == "yes":
+    write_in_file(class_journal)

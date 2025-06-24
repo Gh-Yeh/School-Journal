@@ -1,0 +1,5 @@
+Class: {'Layla': [89, 91, 86], 'Tariq': [77, 84, 73], 'Jana': [100, 97, 94], 'Ziad': [62, 71, 75]}
+Student with the highest average : ['Jana', 97.0]
+Most Consistent Performance : ['Layla', 5]
+Students with garde less than 70 : ['Ziad']
+Class average : 83.25
