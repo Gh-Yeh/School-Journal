@@ -24,6 +24,26 @@ def student_average(grades):
     return sum_grades / len(grades)
 
 
+def highest_average(journal):
+    """
+    Displays the Max_avergae in the students Journal
+    """
+
+    dict_average = {}
+    for students in journal:
+        dict_average[students] = student_average(journal[students])
+
+    max_avg = 0
+    name = ""
+
+    for student in dict_average:
+        if dict_average[student] > max_avg:
+            max_avg = dict_average[student]
+            name = student
+
+    print(f"Student : {name} Average : {max_avg : .2f}")
+
+
 def student_report(journal):
     """
     Display a student_report report of the students
@@ -48,8 +68,13 @@ records = [
     ["Ziad", 75],
 ]
 
+# Part 1: Rebuilding the Journal
 class_journal = students_dict(records)
 
 print(class_journal)
 
+
+# Part 2: The Basic Report
 student_report(class_journal)
+
+highest_average(class_journal)
