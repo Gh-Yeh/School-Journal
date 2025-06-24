@@ -92,6 +92,17 @@ def failed_students(journal):
     print(f"students that have a grade below 70 : {failed}")
 
 
+def total_grades(journal):
+    """
+    Displays how many total grades were enetred in  class
+    """
+    grade_count = 0
+    for students in journal:
+        grade_count += len(journal[students])
+
+    print(grade_count)
+
+
 def student_report(journal):
     """
     Display a student_report report of the students
@@ -128,3 +139,4 @@ student_report(class_journal)
 highest_average(class_journal)
 consistent_performance(class_journal)
 failed_students(class_journal)
+total_grades(class_journal)
