@@ -60,9 +60,9 @@ def max_min(grades):
     return [max_grade, lowest_grade]
 
 
-def consistent_performence(journal):
+def consistent_performance(journal):
     """
-    Displays the Max_avergae in the students Journal
+    Displays the Performance in the students Journal
     """
 
     dict_perf = {}
@@ -78,6 +78,18 @@ def consistent_performence(journal):
             name = student
 
     print(f"Student : {name} Perfomance : {max_perf : .2f}")
+
+
+def failed_students(journal):
+    """
+    Displays students with grade below 70.
+    """
+    failed = []
+    for students in journal:
+        if max_min(journal[students])[1] < 70:
+            failed.append(students)
+
+    print(f"students that have a grade below 70 : {failed}")
 
 
 def student_report(journal):
@@ -114,4 +126,5 @@ print(class_journal)
 student_report(class_journal)
 
 highest_average(class_journal)
-consistent_performence(class_journal)
+consistent_performance(class_journal)
+failed_students(class_journal)
